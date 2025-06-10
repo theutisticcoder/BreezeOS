@@ -1,5 +1,29 @@
 name: install-debs
 type: shell
+packages:
+  - gimp
+  - krita
+  - blender
+  - inkscape
+  - nemo
+  - gnome-tweaks
+  - chrome-gnome-shell
+  - wget
+  - curl
+  - ca-certificates
 commands:
   - bash /deb-pkgs/install-debs.sh
   - rm -rf /deb-pkgs
+post: 
+   - |
+    echo "Installing Google Chrome..."
+    wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    apt install -y ./google-chrome-stable_current_amd64.deb
+    rm google-chrome-stable_current_amd64.deb
+
+    echo "Setting Nemo as the default file manager..."
+    xdg-mime default nemo.desktop inode/directory
+
+    echo "Pinning favorite apps to GNOME taskbar..."
+    gsettings set org.gnome.shell favorite-apps \
+      "['google-chrome.desktop','org.kde.krita.desktop','gimp.desktop','blender.desktop','org.inkscape.Inkscape.desktop','nemo.desktop']"
