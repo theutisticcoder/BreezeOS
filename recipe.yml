@@ -27,7 +27,17 @@ stages:
     type: apt
     source:
       packages:
-      - vim
+        - gimp
+        - krita
+        - blender
+        - inkscape
+        - nemo
+        - gnome-tweaks
+        - chrome-gnome-shell
+        - wget
+        - curl
+        - ca-certificates
+
 
   - name: example-commands # Sample module demonstrating the Shell module with custom commands
     type: shell
